@@ -37,17 +37,13 @@ function initSocket(server) {
 connectedUser.set(user_id, socket.id);
 console.log(connectedUser);            // need to make it for multi logins later
 
-socket.on("incoming-call",({recipientId,offer})=>{
-  console.log("recipientId",recipientId,"}");
-    console.log("offer",offer,"}");
-  const recipentIsOnline = connectedUser.has(recipientId)
-  if(recipentIsOnline){
-    //offer the call to recipent
+socket.on("call-offer",({recipientId,offer})=>{
+  const recipienSocketId = connectedUser.get(recipientId)
+  if(recipienSocketId){
+    console.log("emitted",user_id);
+    
+    socket.to(recipienSocketId).emit("incoming-call",{fromSocket:socket.id,fromUserId:user_id,offer})
   }
-  else{
-    // user is offline
-  }
-  
 })
 
 socket.on("disconnect", () => {
