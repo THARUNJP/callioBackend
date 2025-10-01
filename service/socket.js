@@ -46,6 +46,15 @@ socket.on("call-offer",({recipientId,offer})=>{
   }
 })
 
+socket.on("call-rejection",({callerId,timestamp})=>{
+console.log(callerId,timestamp,"call-rejection");
+const senderSocketId = connectedUser.get(callerId);
+if(senderSocketId){
+  socket.to(senderSocketId).emit("call-declined")
+}
+
+})
+
 socket.on("disconnect", () => {
   connectedUser.forEach((s_id, u_id) => {
     if (socket.id === s_id) {
