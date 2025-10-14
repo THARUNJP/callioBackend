@@ -55,6 +55,16 @@ if(senderSocketId){
 
 })
 
+socket.on("call-acceptance",({callerId,timestamp})=>{
+console.log(callerId,timestamp,"call-acceptance");
+const senderSocketId = connectedUser.get(callerId);
+if(senderSocketId){
+  socket.to(senderSocketId).emit("call-acceptance")
+}
+
+})
+
+
 socket.on("disconnect", () => {
   connectedUser.forEach((s_id, u_id) => {
     if (socket.id === s_id) {
