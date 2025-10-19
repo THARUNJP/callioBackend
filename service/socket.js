@@ -43,7 +43,6 @@ function initSocket(server) {
         socket
           .to(recipienSocketId)
           .emit("incoming-call", {
-            fromSocket: socket.id,
             fromUserId: user_id,
             offer,
           });
@@ -65,6 +64,11 @@ function initSocket(server) {
         socket.to(senderSocketId).emit("call-acceptance", {recipentId:callerId, answer });
       }
     });
+
+    socket.on("ice-candidate",({targetUserId,canditate})=>{
+console.log(targetUserId,canditate,"ice");
+
+    })
 
     socket.on("disconnect", () => {
       connectedUser.forEach((s_id, u_id) => {
