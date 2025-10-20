@@ -65,8 +65,8 @@ function initSocket(server) {
       }
     });
 
-    socket.on("ice-candidate",({targetUserId,canditate})=>{
-console.log(targetUserId,canditate,"ice");
+    socket.on("ice-candidate",({targetUserId,candidate})=>{
+console.log(targetUserId,candidate,"ice..........1.....3....");
 
     })
 
