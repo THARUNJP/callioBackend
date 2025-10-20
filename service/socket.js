@@ -66,7 +66,13 @@ function initSocket(server) {
     });
 
     socket.on("ice-candidate",({targetUserId,candidate})=>{
-console.log(targetUserId,candidate,"ice..........1.....3....");
+      const targetSocketId = connectedUser.get(targetUserId)
+      if(targetSocketId){
+        socket.to(targetSocketId).emit("ice-candidate-client",{candidate})
+      }
+
+
+console.log(targetUserId,candidate,"ice..........1.....3....",targetUserId);
 
     })
 
