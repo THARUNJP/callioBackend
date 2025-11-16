@@ -72,7 +72,6 @@ function initSocket(server) {
       }
 
 
-console.log(targetUserId,candidate,"ice..........1.....3....",targetUserId);
 
     })
 
