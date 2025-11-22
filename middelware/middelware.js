@@ -4,6 +4,8 @@ export const authenticateJWT = (req, res, next) => {
   try {
     const token = req.cookies.token;
     if (!token) {
+      console.log("Access denied. No token provided in cookies.");
+      
       return res.status(401).json({
         status: "fail",
         message: "Access denied. No token provided in cookies.",

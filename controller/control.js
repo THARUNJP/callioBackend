@@ -49,18 +49,18 @@ export const Login = async (req, res) => {
 
 res.cookie("token", token, {
   httpOnly: true,
-  maxAge:  15 * 60 * 1000,       // in milliseconds
-  secure:true,
-  sameSite: "Strict",
-  path: "/"
+  maxAge: 15 * 60 * 1000,
+  secure: false,          // must be false for HTTP
+  sameSite: "Lax",        // "Lax" works for local LAN
+  path: "/",
 });
 
 res.cookie("refreshToken", refreshToken, {
   httpOnly: true,
-  maxAge: 30 * 24 * 60 * 60 * 1000,     // in milliseconds
-  secure: true,
-  sameSite: "Strict",
-  path: "/"
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+  secure: false,
+  sameSite: "Lax",
+  path: "/",
 });
     // Return token with status
     res.status(200).json({ status: "success", message:"Login Successful" });
